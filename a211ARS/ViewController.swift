@@ -109,10 +109,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let plane = OverlayPlane(anchor: anchor as! ARPlaneAnchor) //產出自訂義的可視平台
         self.planes.append(plane) //新增到 ViewController 的記錄中
         node.addChildNode(plane) //把自訂義的可視元件，蓋一層到平台上
-
-        
-        
-        
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        self.planes.filter { plane in
+            return plane.anchor.identifier == anchor.identifier
+        }.first?.update(anchor: anchor as! ARPlaneAnchor )
+    
     }
 
     
