@@ -37,6 +37,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(node) //把 node 加入到目前的 scene 上
         
         
+        let text = SCNText(string: "Hello Text in AR", extrusionDepth: 1.0)
+        text.firstMaterial?.diffuse.contents = UIColor.blue
+        
+        let textNode = SCNNode(geometry: text)
+        textNode.position = SCNVector3(0, 0.05, -0.5)
+        textNode.scale = SCNVector3(0.01, 0.01, 0.01)
+        sceneView.scene.rootNode.addChildNode(textNode)
+        
+        
+        
+        
+        
         
         sceneView.scene = scene
         sceneView.debugOptions = [.showWorldOrigin]
