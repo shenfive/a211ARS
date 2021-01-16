@@ -13,6 +13,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
+    var planes:[OverlayPlane] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,6 +105,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         print("a plane")
+        if !(anchor is ARPlaneAnchor) { return } //確定找到加入的是 plane
+        let plane = OverlayPlane(anchor: anchor as! ARPlaneAnchor) //產出自訂義的可視平台
+        self.planes.append(plane) //新增到 ViewController 的記錄中
+        node.addChildNode(plane) //把自訂義的可視元件，蓋一層到平台上
+
+        
+        
+        
     }
 
     
