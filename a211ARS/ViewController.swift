@@ -102,7 +102,23 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let sphereNode = SCNNode(geometry: sphere)
         sphereNode.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y+0.5, hitResult.worldTransform.columns.3.z)
         sphereNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)//加上物理特性並啟動
+        
+ 
+        
+        
         self.sceneView.scene.rootNode.addChildNode(sphereNode)
+        
+        
+        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01) //新增一個 BOX
+        let material2 = SCNMaterial() //新增材質
+        material2.diffuse.contents = UIColor.red //材質內容為紅色
+        box.materials = [material2] //把 box 的貼圖材質加進去
+        let node = SCNNode(geometry: box) //新增一個 Box
+        node.position = SCNVector3(hitResult.worldTransform.columns.3.x, hitResult.worldTransform.columns.3.y+0.5, hitResult.worldTransform.columns.3.z) //設定 node 在空間的位置
+        node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        self.sceneView.scene.rootNode.addChildNode(node)
+        
+        
     }
 
     
